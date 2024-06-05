@@ -1,6 +1,19 @@
-import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import type { Metadata } from "next";
+import { ThemeProvider } from "styled-components";
+import { SocketProvider } from "@/components/socket-provider";
+import { GlobalStyle } from "../styles/global-style";
+import { theme } from "../styles/theme";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <SocketProvider>
+        <GlobalStyle />
+        <Component {...pageProps} />
+      </SocketProvider>
+    </ThemeProvider>
+  );
 }
+
+export default MyApp;
